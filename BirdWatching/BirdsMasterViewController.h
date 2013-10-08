@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class BirdSightingDataController;
 
 @interface BirdsMasterViewController : UITableViewController
+
+//MVC -- Controller <-> View
+@property(strong, nonatomic) BirdSightingDataController * dataController;
+
 
 @end
