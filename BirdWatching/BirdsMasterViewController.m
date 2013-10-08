@@ -129,8 +129,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"Entered HERE Segue");
-    if ([[segue identifier] isEqualToString:@"ShowSightingDetail"]) {
+    NSLog(@"Entered HERE Segue %@", [segue identifier]);
+    if ([[segue identifier] isEqualToString:@"ShowSightingDetails"]) {
         BirdsDetailViewController *detailViewController = [segue destinationViewController];
         
         detailViewController.sighting = [self.dataController objectAtListIndex:[self.tableView indexPathForSelectedRow].row]    ;
