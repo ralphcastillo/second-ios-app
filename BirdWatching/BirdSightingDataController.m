@@ -16,6 +16,7 @@
 @implementation BirdSightingDataController
 
 -(void)initializeDefaultDataList {
+    NSLog(@"Entered HERE");
     NSMutableArray *sightingList = [[NSMutableArray alloc] init];
     
     self.masterBirdSightingList = sightingList;
@@ -52,7 +53,7 @@
         [self initializeDefaultDataList];
         return self;
     }
-    
+    NSLog(@"Entered HERE xx");
     return nil;
 }
 

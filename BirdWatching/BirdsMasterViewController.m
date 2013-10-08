@@ -27,8 +27,8 @@
 {
     [super awakeFromNib];
     
-    self.dataController = [[BirdSightingDataController alloc] init];
-    
+    self.dataController  = [[BirdSightingDataController alloc] init];
+    NSLog(@"Entered HERE 111");
 }
 
 - (void)viewDidLoad
@@ -75,11 +75,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
+    static NSString *CellIdentifier = @"BirdSightingCell";
+    
+    static NSDateFormatter *formatter = nil;
+    if (formatter == nil) {
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
     BirdSighting * birdSighting = [self.dataController objectAtListIndex:indexPath.row];
     [[cell textLabel] setText:[birdSighting name]];
     [[cell detailTextLabel] setText:[birdSighting location]];
+    
+    
+    NSLog(@"Entered HERE cellForRowAt");
     
     return cell;
 }
@@ -119,10 +129,11 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
+    NSLog(@"Entered HERE Segue");
+    if ([[segue identifier] isEqualToString:@"ShowSightingDetail"]) {
+        BirdsDetailViewController *detailViewController = [segue destinationViewController];
+        
+        detailViewController.sighting = [self.dataController objectAtListIndex:[self.tableView indexPathForSelectedRow].row]    ;
     }
 }
 
